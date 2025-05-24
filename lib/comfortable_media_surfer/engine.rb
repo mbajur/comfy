@@ -10,9 +10,19 @@ require 'haml-rails'
 
 module ComfortableMediaSurfer
   class Engine < ::Rails::Engine
+    initializer "comfortable_media_surfer.importmap", before: "importmap" do |app|
+      app.config.importmap.paths << root.join("config/importmap.rb")
+      app.config.importmap.cache_sweepers << root.join("app/assets/javascripts")
+      # app.config.importmap.cache_sweepers << root.join("app/javascript")
+    end
+
     initializer 'comfortable_media_surfer.setup_assets' do |app|
       app.config.assets.paths << root.join('app/assets/builds')
       app.config.assets.precompile += %w[comfy/admin/cms/application.js comfy/admin/cms/application.css]
+    end
+
+    initializer "comfortable_media_surfer.assets" do |app|
+      app.config.assets.precompile += %w[manifest]
     end
 
     config.to_prepare do
