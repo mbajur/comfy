@@ -25,6 +25,14 @@ module ComfortableMediaSurfer
       app.config.assets.precompile += %w[manifest]
     end
 
+    initializer "my_engine.yaml_column_permitted_classes" do
+      Rails.application.config.active_record.yaml_column_permitted_classes ||= []
+      Rails.application.config.active_record.yaml_column_permitted_classes += [
+        ActiveSupport::HashWithIndifferentAccess,
+        Symbol
+      ]
+    end
+
     config.to_prepare do
       Dir.glob("#{Rails.root}app/decorators/comfortable_media_surfer/*_decorator*.rb").each do |c|
         require_dependency(c)

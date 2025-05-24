@@ -10,3 +10,7 @@ pin "@lezer/", to: "https://esm.sh/*@lezer/"
 pin "crelt", to: "https://esm.sh/crelt"
 pin "@codemirror/", to: "https://esm.sh/*@codemirror/"
 pin "codemirror", to: "https://esm.sh/*codemirror"
+
+# ActionText
+pin "trix", to: "https://cdn.jsdelivr.net/npm/trix@2.1.15/+esm"
+pin "@rails/actiontext", to: "actiontext.esm.js"
