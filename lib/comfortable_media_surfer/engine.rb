@@ -31,7 +31,10 @@ module ComfortableMediaSurfer
       Rails.application.config.active_record.yaml_column_permitted_classes ||= []
       Rails.application.config.active_record.yaml_column_permitted_classes += [
         ActiveSupport::HashWithIndifferentAccess,
-        Symbol
+        Symbol,
+        ActiveSupport::TimeWithZone,
+        ActiveSupport::TimeZone,
+        Time,
       ]
     end
 
