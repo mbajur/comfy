@@ -20,3 +20,6 @@ pin "@rails/actiontext", to: "actiontext.esm.js"
 
 # Time picker
 pin "flatpickr", to: "https://cdn.jsdelivr.net/npm/flatpickr@4.0.6/+esm"
+
+# File uploads
+pin "plupload", to: "https://cdn.jsdelivr.net/npm/plupload@2.3.9/+esm"
