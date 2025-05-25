@@ -10,7 +10,7 @@
   = form.select :parent_id, options, bootstrap: {custom_control: true}
 
 - if (options = ::Comfy::Cms::Layout.options_for_select(@site)).present?
-  = form.select :layout_id, options, {bootstrap: {custom_control: true}}, {data: {url: form_fragments_comfy_admin_cms_site_page_path(@site, @page.id.to_i)}, id: "fragments-toggle"}
+  = form.select :layout_id, options, {bootstrap: {custom_control: true}}, {data: {controller: 'page-fragments', action: 'page-fragments#onChange', page_fragments_fragments_url_value: form_fragments_comfy_admin_cms_site_page_path(@site, @page.id.to_i)}, id: "fragments-toggle"}
 
 = comfy_admin_partial "comfy/admin/cms/partials/page_form_inner", form: form
 

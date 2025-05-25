@@ -1,3 +1,5 @@
+pin "@rails/request.js", to: "https://cdn.jsdelivr.net/npm/@rails/request.js@0.0.11/dist/requestjs.min.js"
+
 pin_all_from ComfortableMediaSurfer::Engine.root.join("app/assets/javascripts/comfy/controllers"), under: "comfy/controllers"
 pin "comfy/application"
 
