@@ -14,3 +14,6 @@ pin "codemirror", to: "https://esm.sh/*codemirror"
 # ActionText
 pin "trix", to: "https://cdn.jsdelivr.net/npm/trix@2.1.15/+esm"
 pin "@rails/actiontext", to: "actiontext.esm.js"
+
+# Time picker
+pin "flatpickr", to: "https://cdn.jsdelivr.net/npm/flatpickr@4.0.6/+esm"
