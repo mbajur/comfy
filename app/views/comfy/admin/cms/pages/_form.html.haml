@@ -1,9 +1,10 @@
 = comfy_admin_partial "comfy/admin/cms/partials/page_form_before", form: form
 
-= form.text_field :label, data: { slugify: @page.new_record? }
+%div{ data: { controller: 'slugify' } }
+  = form.text_field :label, data: { slugify: @page.new_record?, slugify_target: 'input', action: 'input->slugify#perform' }
 
-- if @page.parent.present?
-  = form.text_field :slug, data: { slug: true }, prepend: @page.parent.full_path
+  - if @page.parent.present?
+    = form.text_field :slug, data: { slug: true, slugify_target: 'slug' }, prepend: @page.parent.full_path
 
 - if (options = ::Comfy::Cms::Page.options_for_select(site: @site, current_page: @page, exclude_self: true)).present?
   = form.select :parent_id, options, bootstrap: {custom_control: true}
