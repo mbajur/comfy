@@ -34,4 +34,5 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'rails-i18n',           '>= 6.0.0'
   spec.add_dependency 'importmap-rails'
   spec.add_dependency 'tabler_icons_ruby'
+  spec.add_dependency 'diffy'
 end

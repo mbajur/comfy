@@ -8,6 +8,7 @@ require 'active_link_to'
 require 'kramdown'
 require 'haml-rails'
 require 'tabler_icons_ruby'
+require 'diffy'
 
 module ComfortableMediaSurfer
   class Engine < ::Rails::Engine

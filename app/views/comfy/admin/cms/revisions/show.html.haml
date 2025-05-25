@@ -21,14 +21,8 @@
     .col-lg-2.text-lg-right.bg-light
       .label= label
     .col-lg-10
-      .row
-        .col-lg-6
-          .content
-            = safe_join @versioned_content[label].to_s.split("\n"), raw("<br/>")
-        .col-lg-6.diff
-          .original.d-none= @versioned_content[label]
-          .current.d-none= content
-          .content
+      .content
+        =raw Diffy::Diff.new(@versioned_content[label], content).to_s(:html_simple)
 
 = comfy_form_with model: @revision, url: { action: :revert } do |form|
   = form.form_actions do
