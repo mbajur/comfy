@@ -7,6 +7,7 @@ require 'comfy_bootstrap_form'
 require 'active_link_to'
 require 'kramdown'
 require 'haml-rails'
+require 'tabler_icons_ruby'
 
 module ComfortableMediaSurfer
   class Engine < ::Rails::Engine

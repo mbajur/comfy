@@ -6,7 +6,6 @@ import "bootstrap/js/src/collapse";
 
 import "../../vendor/diff/diff_match_patch.min";
 import "../../vendor/diff/pretty_text_diff";
-import "../../vendor/fontawesome";
 
 import "./base";
 import "./categories";

@@ -20,4 +20,4 @@
       = link_to truncated_filename, attachment, data: link_data, class: "btn btn-light text-truncate", target: "_blank"
       = check_box_tag "#{object_name}[fragments_attributes][#{index}][file_ids_destroy][]", attachment.id, false, id: dom_id(attachment)
       %label.btn.btn-light{for: dom_id(attachment)}
-        %i.fas.fa-fw.fa-times
+        = tabler_icon :trash, size: 15

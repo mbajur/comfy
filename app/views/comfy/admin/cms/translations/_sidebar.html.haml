@@ -14,6 +14,6 @@
 
       - url = comfy_admin_cms_site_page_translation_path(@site, @page, translation)
       = link_to url, method: :delete, data: {confirm: t(".confirm")}, class: "btn btn-danger" do
-        %i.fas.fa-fw.fa-times
+        = tabler_icon :x, size: 12
 
   = link_to t(".new"), new_comfy_admin_cms_site_page_translation_path(@site, @page), class: "btn btn-sm btn-secondary d-block mb-1"

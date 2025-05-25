@@ -7,7 +7,7 @@
 #
 class ComfortableMediaSurfer::Content::Tags::Wysiwyg < ComfortableMediaSurfer::Content::Tags::Fragment
   def render
-    renderable ? ActionText::Content.new(content.first).to_s : ''
+    renderable ? ActionText::Content.new(content&.first).to_s : ''
   end
 
   def form_field(object_name, view, index)

@@ -1,0 +1,16 @@
+<turbo-frame id="categories">
+  <div class="box categories-widget">
+    <div class="read">
+      <div class="categories">
+        <div class="category">
+          <% active_class = params[:categories].blank? ? "active" : nil %>
+          <%= link_to t('.all'), results_path, class: "btn btn-sm btn-light btn-block #{active_class}", data: { turbo_frame: "_top" } %>
+        </div>
+
+        <% @categories.each do |category| %>
+          <%= render "comfy/admin/cms/categories/show", category: category, read: true %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</turbo-frame>

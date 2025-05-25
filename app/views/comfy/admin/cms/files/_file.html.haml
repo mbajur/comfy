@@ -7,7 +7,7 @@
       .item-controls.d-none.d-lg-block
         - if !params[:categories].present? && @site.files.count > 1
           .dragger
-            %i.fas.fa-bars
+            = tabler_icon :grip_vertical, size: 18
       .item-content
         .item-title
           = link_to file.label, file.attachment, target: "_blank",
