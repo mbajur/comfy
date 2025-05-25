@@ -1,0 +1,26 @@
+- children      = @pages_by_parent[page.id]
+- siblings      = @pages_by_parent[page.parent_id]
+- has_siblings  = siblings.size > 1
+- has_children  = children.present?
+- branch_open = (session[:cms_page_tree] || []).member?(page.id.to_s) || page.root?
+
+%div.d-flex{ id: dom_id(page, :branch_heading) }
+  - unless category_view
+    .item-controls
+      - if has_siblings
+        .dragger.d-none.d-md-block
+          = tabler_icon :grip_vertical, size: 18
+
+      - if has_children && !page.root?
+        - status = branch_open ? "open" : ""
+        - url = toggle_branch_comfy_admin_cms_site_page_path(@site, page)
+        = button_to url, title: t(".toggle"), class: "toggle #{status}" do
+          = tabler_icon :square_rounded_plus, class: 'expand', size: 18
+          = tabler_icon :square_rounded_minus, class: 'collapse', size: 18
+
+  .item-content
+    .item-title
+      - published_css_class = page.is_published? ? "published" : "draft"
+      = link_to page.label, edit_comfy_admin_cms_site_page_path(@site, page), class: published_css_class
+    .item-meta
+      = link_to page.url, page.url, target: "_blank"

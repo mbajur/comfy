@@ -28,7 +28,7 @@ module ComfortableMediaSurfer::Routing
                 concerns :with_form_fragments
                 concerns :with_revisions, controller: 'revisions/page'
 
-                get :toggle_branch, on: :member
+                post :toggle_branch, on: :member
 
                 resources :translations, except: [:index] do
                   concerns :with_form_fragments

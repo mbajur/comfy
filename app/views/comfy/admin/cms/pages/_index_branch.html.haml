@@ -6,29 +6,10 @@
 - branch_open   = (session[:cms_page_tree] || []).member?(page.id.to_s) || page.root?
 - category_view = params[:categories].present?
 
-%li{id: dom_id(page), data: {id: page.id}}
+%li{id: dom_id(page, :branch)}
   .row
-
     .col-md-6.item
-      - unless category_view
-        .item-controls
-          - if has_siblings
-            .dragger.d-none.d-md-block
-              = tabler_icon :grip_vertical, size: 18
-
-          - if has_children && !page.root?
-            - status = branch_open ? "open" : ""
-            - url = toggle_branch_comfy_admin_cms_site_page_path(@site, page)
-            = link_to url, remote: true, title: t(".toggle"), class: "toggle #{status}" do
-              = tabler_icon :square_plus, class: 'expand', size: 18
-              = tabler_icon :square_minus, class: 'collapse', size: 18
-
-      .item-content
-        .item-title
-          - published_css_class = page.is_published? ? "published" : "draft"
-          = link_to page.label, edit_comfy_admin_cms_site_page_path(@site, page), class: published_css_class
-        .item-meta
-          = link_to page.url, page.url, target: "_blank"
+      = render "index_branch_heading", page: page, category_view: category_view
 
     .col-md-2.item-categories.d-flex.align-items-center
       = render "comfy/admin/cms/categories/categories", object: page
@@ -39,6 +20,6 @@
         = link_to t(".edit"), edit_comfy_admin_cms_site_page_path(@site, page), class: "btn btn-outline-secondary"
         = link_to t(".delete"), comfy_admin_cms_site_page_path(@site, page), method: :delete, data: {confirm: t('.are_you_sure')}, class: "btn btn-danger"
 
-  - if !category_view && has_children && branch_open
-    %ul.list.children.sortable.pl-md-3
+  %ul.list.children.sortable.pl-md-3{ id: dom_id(page, :branch_children) }
+    - if !category_view && has_children && branch_open
       = render partial: "index_branch", collection: children
