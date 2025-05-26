@@ -7,7 +7,7 @@
       .item-controls.d-none.d-lg-block
         - if !params[:categories].present? && @site.files.count > 1
           .dragger
-            %i.fas.fa-bars
+            = tabler_icon :grip_vertical, size: 18
       .item-content
         .item-title
           = link_to file.label, file.attachment, target: "_blank",
@@ -25,7 +25,8 @@
       %span.file-path
         = file_tag
 
-    .col-md-3.d-flex.align-items-center.justify-content-md-end
-      .btn-group.btn-group-sm
-        = link_to t(".edit"), edit_comfy_admin_cms_site_file_path(@site, file), class: "btn btn-outline-secondary"
-        = link_to t(".delete"), comfy_admin_cms_site_file_path(@site, file), method: :delete, remote: true, data: {confirm: t(".are_you_sure")}, class: "btn btn-danger"
+    - unless params[:modal]
+      .col-md-3.d-flex.align-items-center.justify-content-md-end
+        .btn-group.btn-group-sm
+          = link_to t(".edit"), edit_comfy_admin_cms_site_file_path(@site, file), class: "btn btn-outline-secondary"
+          = link_to t(".delete"), comfy_admin_cms_site_file_path(@site, file), method: :delete, remote: true, data: {confirm: t(".are_you_sure")}, class: "btn btn-danger"

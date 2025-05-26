@@ -7,9 +7,11 @@
     - active_class = active ? "active" : nil
     - categories = active ? categories.reject{|c| c == category.label} : categories << category.label
     - url = "?#{{categories: categories}.to_query}"
-    = link_to category.label, url, class: "btn btn-sm btn-light btn-block text-left text-truncate #{active_class}"
+    = link_to url, class: "btn btn-sm btn-light btn-block text-left text-truncate align-items-center d-flex #{active_class}", data: { turbo_frame: "_top" } do
+      = category.label
+      = tabler_icon :check, size: 15, class: "ml-auto text-muted" if active
   - else
     .btn-group.d-flex
       = link_to category.label, edit_comfy_admin_cms_site_category_path(@site, category), remote: true, class: "btn btn-sm btn-light w-100 text-left text-truncate"
       = link_to comfy_admin_cms_site_category_path(@site, category), method: :delete, remote: true, data: {confirm: t('.are_you_sure')}, class: 'btn btn-sm btn-danger', aria: {label: "Delete Category"} do
-        %i.fas.fa-fw.fa-times
+        = tabler_icon :x, size: 15

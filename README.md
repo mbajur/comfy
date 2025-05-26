@@ -56,7 +56,7 @@ comfy_route :cms, path: "/"
 
 ### From Sofa to Surfer
 
-The database structure is the same.  Your Sofa project will also need to be upgraded to >= Rails 7.x  
+The database structure is the same.  Your Sofa project will also need to be upgraded to >= Rails 7.x
 Then you should simply be able to update your Gemfile thus, and run bundle
 
 ```ruby

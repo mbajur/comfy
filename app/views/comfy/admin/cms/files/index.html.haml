@@ -5,6 +5,7 @@
   session_id = request.session_options[:id]
   session_id_value = session_id.respond_to?(:public_id) ? session_id.public_id : session_id.to_s
   cms_uploader_data = {
+    controller: 'file-upload',
     cms_uploader: {
       url: comfy_admin_cms_site_files_path(@site, source: :plupload, categories: params[:categories]),
       token: { name: request_forgery_protection_token, value: form_authenticity_token },
@@ -12,20 +13,21 @@
     }
   }
 
-#cms-uploader{data: cms_uploader_data}
-  #cms-uploader-drag-drop-target
+%turbo-frame#files_modal{ target: "_top" }
+  #cms-uploader{data: cms_uploader_data}
+    #cms-uploader-drag-drop-target
 
-  .page-header
-    = link_to t('.new_link'), new_comfy_admin_cms_site_file_path(@site), class: "btn btn-secondary float-right", id: "cms-uploader-browse"
-    %h2= t('.title')
+    .page-header
+      = link_to t('.new_link'), new_comfy_admin_cms_site_file_path(@site), class: "btn btn-secondary float-right", id: "cms-uploader-browse"
+      %h2= t('.title')
 
-  = comfy_admin_partial "comfy/admin/cms/partials/files_before"
+    = comfy_admin_partial "comfy/admin/cms/partials/files_before"
 
-  = comfy_paginate @files
+    = comfy_paginate @files
 
-  %ul.list.sortable.cms-uploader-filelist
-    = render partial: "file", collection: @files
+    %ul.list.sortable.cms-uploader-filelist{ data: { controller: 'sortable-list', sortable_list_update_url: reorder_comfy_admin_cms_site_files_path(@site) } }
+      = render partial: "file", collection: @files
 
-  = comfy_admin_partial "comfy/admin/cms/partials/files_after"
+    = comfy_admin_partial "comfy/admin/cms/partials/files_after"
 
-  = comfy_paginate @files
+    = comfy_paginate @files

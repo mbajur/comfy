@@ -1,0 +1,19 @@
+<turbo-stream action="replace" target="<%= dom_id(@page, :branch_heading) %>">
+  <template>
+    <%= render "index_branch_heading", page: @page, category_view: false %>
+  </template>
+</turbo-stream>
+
+<% if session[:cms_page_tree].member?(@page.id.to_s) %>
+  <turbo-stream action="replace" target="<%= dom_id(@page, :branch_children) %>">
+    <template>
+      <ul class="list children sortable pl-md-3" id="<%= dom_id(@page, :branch_children) %>">
+        <%= render partial: "index_branch", collection: @page.children %>
+      </ul>
+    </template>
+  </turbo-stream>
+<% else %>
+  <turbo-stream action="update" target="<%= dom_id(@page, :branch_children) %>">
+    <template></template>
+  </turbo-stream>
+<% end %>

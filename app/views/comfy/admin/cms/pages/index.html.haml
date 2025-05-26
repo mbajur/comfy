@@ -7,7 +7,7 @@
 
 = comfy_admin_partial "comfy/admin/cms/partials/pages_before"
 
-%ul.list.sortable
+%ul.list.sortable{ data: { controller: 'sortable-list', sortable_list_update_url: reorder_comfy_admin_cms_site_pages_path(@site) } }
   = render partial: "index_branch", collection: @pages
 
 = comfy_admin_partial "comfy/admin/cms/partials/pages_after"

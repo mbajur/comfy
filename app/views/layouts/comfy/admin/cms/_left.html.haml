@@ -2,7 +2,7 @@
 
 %nav.navbar.navbar-expand-lg
   %button.navbar-toggler{type: "button", data: {toggle:"collapse", target: "#leftnav"}, aria: {controls: "navbarSupportedContent", expanded: "false", label: "Toggle navigation"}}
-    %i.fas.fa-bars
+    = tabler_icon :menu_2, size: 18
 
   #leftnav.navbar-collapse.collapse
 
@@ -23,8 +23,8 @@
             = t('comfy.admin.cms.base.snippets')
         %li.nav-item
           - unless is_active_link?(comfy_admin_cms_site_files_path(@site))
-            %a.cms-files-open-modal{href: comfy_admin_cms_site_files_path(@site), title: "Open library"}
-              %i.fas.fa-bars
+            %a.cms-files-open-modal{title: "Open library", data: { bs_toggle: 'modal', bs_target: '.cms-files-modal' }}
+              = tabler_icon :menu_2, size: 15
           = active_link_to comfy_admin_cms_site_files_path(@site), class: "nav-link" do
             = t('comfy.admin.cms.base.files')
 
