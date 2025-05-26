@@ -1,0 +1,11 @@
+//= link comfy/application.js
+//= link comfy/controllers/application.js
+//= link comfy/controllers/codemirror_controller.js
+//= link comfy/controllers/categories_controller.js
+//= link comfy/controllers/slugify_controller.js
+//= link comfy/controllers/datepicker_controller.js
+//= link comfy/controllers/datetimepicker_controller.js
+//= link comfy/controllers/page_fragments_controller.js
+//= link comfy/controllers/file_upload_controller.js
+//= link comfy/controllers/sortable_list_controller.js
+//= link comfy/controllers/index.js
