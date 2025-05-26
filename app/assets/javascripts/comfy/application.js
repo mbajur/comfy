@@ -1,5 +1,7 @@
 import Rails from "@rails/ujs"
 import * as BSN from "bootstrapNative";
+import 'trix'
+import '@rails/actiontext'
 import "@hotwired/turbo-rails"
 import "comfy/controllers"
 
