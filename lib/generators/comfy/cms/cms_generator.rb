@@ -55,6 +55,12 @@ module Comfy
                   'app/assets/stylesheets/comfy/admin/cms/custom.sass'
       end
 
+      def generate_manifest
+        insert_into_file 'app/assets/config/manifest.js' do
+          "//= link comfy_manifest.js"
+        end
+      end
+
       def show_readme
         readme 'lib/generators/comfy/cms/README'
       end
