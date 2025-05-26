@@ -23,3 +23,6 @@ pin "flatpickr", to: "https://cdn.jsdelivr.net/npm/flatpickr@4.0.6/+esm"
 
 # File uploads
 pin "plupload", to: "https://cdn.jsdelivr.net/npm/plupload@2.3.9/+esm"
+
+# Sorting
+pin "sortablejs", to: "https://cdn.jsdelivr.net/npm/sortablejs@1.15.6/+esm"

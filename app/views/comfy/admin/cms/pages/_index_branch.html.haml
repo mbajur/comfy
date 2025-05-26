@@ -6,7 +6,7 @@
 - branch_open   = (session[:cms_page_tree] || []).member?(page.id.to_s) || page.root?
 - category_view = params[:categories].present?
 
-%li{id: dom_id(page, :branch)}
+%li{id: dom_id(page, :branch), data: { id: page.id }}
   .row
     .col-md-6.item
       = render "index_branch_heading", page: page, category_view: category_view
@@ -20,6 +20,6 @@
         = link_to t(".edit"), edit_comfy_admin_cms_site_page_path(@site, page), class: "btn btn-outline-secondary"
         = link_to t(".delete"), comfy_admin_cms_site_page_path(@site, page), method: :delete, data: {confirm: t('.are_you_sure')}, class: "btn btn-danger"
 
-  %ul.list.children.sortable.pl-md-3{ id: dom_id(page, :branch_children) }
+  %ul.list.children.sortable.pl-md-3{ id: dom_id(page, :branch_children), data: { controller: 'sortable-list', sortable_list_update_url: reorder_comfy_admin_cms_site_pages_path(@site) } }
     - if !category_view && has_children && branch_open
       = render partial: "index_branch", collection: children
