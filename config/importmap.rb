@@ -4,6 +4,9 @@ pin "@rails/ujs", to: "https://ga.jspm.io/npm:@rails/ujs@7.0.1/lib/assets/compil
 pin_all_from ComfortableMediaSurfer::Engine.root.join("app/assets/javascripts/comfy/controllers"), under: "comfy/controllers"
 pin "comfy/application"
 
+# Bootstrap
+pin "bootstrapNative", to: "https://cdn.jsdelivr.net/npm/bootstrap.native@5.1.2/+esm"
+
 # Codemirror deps, see:
 # https://discuss.codemirror.net/t/esm-compatible-codemirror-build-directly-importable-in-browser/5933/13
 pin "style-mod", to: "https://esm.sh/style-mod"
