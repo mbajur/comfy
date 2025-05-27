@@ -14,6 +14,10 @@
 
   = javascript_importmap_tags "comfy/application"
 
+  - ComfortableMediaSurfer.configuration.additional_importmap_modules.each do |importmap_module|
+    %script{ type: "module"}
+      import "#{importmap_module}"
+
   = stylesheet_link_tag "comfy/admin/cms/application", media: "all", "data-turbolinks-track": "reload"
 
   = yield :head

@@ -84,6 +84,9 @@ class ComfortableMediaSurfer::Configuration
   # For example: include fragments into json data with `config.page_to_json_options = { include: [:fragments] }`
   attr_accessor :page_to_json_options
 
+  # Additional importmap modules to run
+  attr_accessor :additional_importmap_modules
+
   # Configuration defaults
   def initialize
     @cms_title              = 'ComfortableMediaSurfer CMS Engine'
@@ -134,5 +137,6 @@ class ComfortableMediaSurfer::Configuration
     @reveal_cms_partials  = false
     @public_cms_path      = nil
     @page_to_json_options = { methods: [:content], except: [:content_cache] }
+    @additional_importmap_modules = []
   end
 end
