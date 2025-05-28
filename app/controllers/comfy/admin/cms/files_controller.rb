@@ -66,24 +66,15 @@ class Comfy::Admin::Cms::FilesController < Comfy::Admin::Cms::BaseController
 
     @file.save!
 
-    case params[:source]
-    when 'plupload'
-      render partial: 'file', object: @file
-    when 'redactor'
-      render json: {
-        filelink: url_for(@file.attachment),
-        filename: @file.attachment.filename
-      }
+    if params[:source].in?(available_sources)
+      send("on_#{params[:source]}_create_success")
     else
       flash[:success] = I18n.t('comfy.admin.cms.files.created')
       redirect_to action: :edit, id: @file
     end
   rescue ActiveRecord::RecordInvalid
-    case params[:source]
-    when 'plupload'
-      render body: @file.errors.full_messages.to_sentence, status: :unprocessable_entity
-    when 'redactor'
-      render body: nil, status: :unprocessable_entity
+    if params[:source].in?(available_sources)
+      send("on_#{params[:source]}_create_failure")
     else
       flash.now[:danger] = I18n.t('comfy.admin.cms.files.creation_failure')
       render action: :new
@@ -135,5 +126,58 @@ protected
       params[:file][:file] = file
     end
     params.fetch(:file, {}).permit!
+  end
+
+  # @todo Move that out to Comfy::Editorjs
+  def on_editorjs_create_failure
+    render json: { success: 0, errors: @file.errors.full_messages },
+           status: :unprocessable_entity
+  end
+
+  def on_plupload_create_failure
+    render body: @file.errors.full_messages.to_sentence,
+           status: :unprocessable_entity
+  end
+
+  def on_redactor_create_failure
+    render body: nil, status: :unprocessable_entity
+  end
+
+  def on_plupload_create_success
+    render partial: 'file', object: @file
+  end
+
+  def on_redactor_create_success
+    render json: {
+      filelink: url_for(@file.attachment),
+      filename: @file.attachment.filename
+    }
+  end
+
+  # @todo Move that out to Comfy::Editorjs
+  def on_editorjs_create_success
+    attachment = @file.attachment
+    metadata = attachment.blob.metadata || {}
+    data = {
+      success: 1,
+      file: {
+        id: @file.id,
+        url: url_for(attachment),
+        width: metadata['width'],
+        height: metadata['height'],
+        filename: metadata['filename'],
+        mime_type: metadata['mime_type'],
+      }
+    }
+    render json: data, status: :created
+  end
+
+  def available_sources
+    sources = %w[redactor plupload]
+
+    # @todo Move that out to Comfy::Editorjs
+    sources << 'editorjs' if Object.const_defined?('Comfy::Editorjs')
+
+    sources
   end
 end
