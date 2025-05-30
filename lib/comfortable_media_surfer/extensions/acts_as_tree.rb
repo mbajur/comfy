@@ -101,6 +101,27 @@ module ComfortableMediaSurfer::Extensions::ActsAsTree
       parent ? parent.children : self.class.roots
     end
 
+    # Returns all the nodes at the same level in the tree as the current node.
+    #
+    #  root1child1.generation # => [root1child2, root2child1, root2child2]
+    def generation
+      self_and_generation - [self]
+    end
+
+    # Returns a reference to the current node and all the nodes at the same level as it in the tree.
+    #
+    #  root1child1.self_and_generation # => [root1child1, root1child2, root2child1, root2child2]
+    def self_and_generation
+      self.class.select {|node| node.tree_level == self.tree_level }
+    end
+
+    # Returns the level (depth) of the current node 
+    #
+    #  root1child1.tree_level # => 1
+    def tree_level
+      self.ancestors.size
+    end
+
     # BUG: https://github.com/rails/rails/issues/14369
     # It's still a bug. Remove it to see failing test
     def parent_id=(id)
