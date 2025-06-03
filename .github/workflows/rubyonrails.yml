@@ -1,6 +1,8 @@
 name: "Rails CI"
 on:
   push:
+    branches:
+      - comfy
   pull_request:
 
 jobs:
