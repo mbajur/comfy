@@ -4,4 +4,4 @@ updates:
   - package-ecosystem: "bundler"
     directory: "/"  # The root directory where your Gemfile is located
     schedule:
-      interval: "monthly" # Options: "daily", "weekly", "monthly"
+      interval: "daily" # Options: "daily", "weekly", "monthly"
