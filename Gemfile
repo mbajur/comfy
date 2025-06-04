@@ -16,6 +16,7 @@ group :development, :test do
   gem 'sqlite3',            '>= 2.1'
   # gem 'mysql2',             '~> 0.5'
   # gem 'pg',                 '~> 1.5.4'
+  gem 'importmap-rails'
 end
 
 group :development do
