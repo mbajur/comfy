@@ -11,7 +11,7 @@ class ComfortableMediaSurfer::Content::Tags::Date < ComfortableMediaSurfer::Cont
       class: 'form-control',
       data: {
         'controller' => 'datepicker',
-        'datepicker-locale-value' => I18n.locale,
+        'datepicker-locale-value' => I18n.locale
       }
     }
     value = content.present? ? content.to_fs(:db) : ''

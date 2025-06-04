@@ -57,7 +57,7 @@ module Comfy
 
       def generate_manifest
         insert_into_file 'app/assets/config/manifest.js' do
-          "//= link comfy_manifest.js"
+          '//= link comfy_manifest.js'
         end
       end
 

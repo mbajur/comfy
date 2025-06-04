@@ -166,7 +166,7 @@ protected
         width: metadata['width'],
         height: metadata['height'],
         filename: metadata['filename'],
-        mime_type: metadata['mime_type'],
+        mime_type: metadata['mime_type']
       }
     }
     render json: data, status: :created

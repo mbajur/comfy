@@ -34,7 +34,7 @@ class ComfortableMediaSurfer::Content::Tags::Datetime < ComfortableMediaSurfer::
       class: 'form-control',
       data: {
         'controller' => 'datetimepicker',
-        'datetimepicker-locale-value' => I18n.locale,
+        'datetimepicker-locale-value' => I18n.locale
       }
     }
     value = content.present? ? content.to_fs(:db) : ''
