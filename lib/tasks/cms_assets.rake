@@ -10,7 +10,7 @@ namespace :comfy do
         puts 'Error: Failed to install npm packages.'
         exit(-1)
       end
-      unless system('npm run build && npm run build:css')
+      unless system('npm run build:css')
         puts 'Error: Failed to compile assets'
         exit(-1)
       end

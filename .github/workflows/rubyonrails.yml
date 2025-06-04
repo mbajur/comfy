@@ -45,6 +45,9 @@ jobs:
       - name: Update surfer gem
         run: bundle update comfortable_media_surfer
 
+      - name: Compile assets
+        run: bin/bundle exec rails comfy:compile_assets
+
       - name: Run tests
         run: |
           bin/bundle exec rails db:drop
