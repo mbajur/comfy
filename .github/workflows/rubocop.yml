@@ -1,4 +1,4 @@
-name: "Rails CI"
+name: "Rubocop"
 on:
   push:
     branches:
@@ -21,8 +21,3 @@ jobs:
 
       - name: Lint the code
         run: bin/bundle exec rubocop --parallel
-
-      - name: Audit for security
-        run: |
-          bin/bundle exec brakeman -q -w3
-          bin/bundle exec bundler-audit --update --gemfile-lock gemfiles/${{ matrix.rails-version }}.gemfile.lock
