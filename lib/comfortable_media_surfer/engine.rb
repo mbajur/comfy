@@ -9,6 +9,7 @@ require 'kramdown'
 require 'haml-rails'
 require 'tabler_icons_ruby'
 require 'diffy'
+require 'importmap-rails'
 
 module ComfortableMediaSurfer
   class Engine < ::Rails::Engine
