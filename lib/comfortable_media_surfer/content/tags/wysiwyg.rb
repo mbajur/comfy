@@ -11,9 +11,9 @@ class ComfortableMediaSurfer::Content::Tags::Wysiwyg < ComfortableMediaSurfer::C
   end
 
   def form_field(object_name, view, index)
-    name    = "#{object_name}[fragments_attributes][#{index}][content]"
+    name    = "#{object_name}[fragments_attributes][#{index}]"
     options = { id: form_field_id, value: content }
-    input   = view.send(:rich_text_area, name, nil, options)
+    input   = view.send(:rich_text_area, name, :content, options)
     yield input
   end
 end

@@ -73,7 +73,7 @@ class Comfy::Admin::Cms::PagesControllerTest < ActionDispatch::IntegrationTest
     assert_equal @layout, assigns(:page).layout
     assert_template :new
     assert_select "form[action='/admin/sites/#{@site.id}/pages']"
-    assert_select "select[data-url='/admin/sites/#{@site.id}/pages/0/form_fragments']"
+    assert_select "select[data-page-fragments-fragments-url-value='/admin/sites/#{@site.id}/pages/0/form_fragments']"
 
     assert_select "textarea[name='page[fragments_attributes][0][content]']"
     assert_select "input[type='hidden'][name='page[fragments_attributes][0][identifier]'][value='content']"
@@ -84,7 +84,8 @@ class Comfy::Admin::Cms::PagesControllerTest < ActionDispatch::IntegrationTest
     @layout.update_column(:content, '{{cms:wysiwyg a}}{{cms:markdown b}}')
     r :get, new_comfy_admin_cms_site_page_path(site_id: @site)
     assert_response :success
-    assert_select "textarea[name='page[fragments_attributes][0][content]']"
+
+    assert_select "input[type='hidden'][name='page[fragments_attributes][0][content]']"
     assert_select "input[type='hidden'][name='page[fragments_attributes][0][identifier]'][value='a']"
     assert_select "input[type='hidden'][name='page[fragments_attributes][0][tag]'][value='wysiwyg']"
     assert_select "textarea[name='page[fragments_attributes][1][content]']"
@@ -128,8 +129,9 @@ class Comfy::Admin::Cms::PagesControllerTest < ActionDispatch::IntegrationTest
     @layout.update_column(:content, '{{cms:text a, namespace: a}}{{cms:text b, namespace: b}}')
     r :get, new_comfy_admin_cms_site_page_path(site_id: @site)
     assert_response :success
-    assert_select "a[data-toggle='tab'][href='#ns-a']", 'A'
-    assert_select "a[data-toggle='tab'][href='#ns-b']", 'B'
+
+    assert_select "a[data-bs-toggle='tab'][href='#ns-a']", 'A'
+    assert_select "a[data-bs-toggle='tab'][href='#ns-b']", 'B'
     assert_select "input[name='page[fragments_attributes][0][content]']"
     assert_select "input[type='hidden'][name='page[fragments_attributes][0][identifier]'][value='a']"
     assert_select "input[name='page[fragments_attributes][1][content]']"
@@ -147,7 +149,7 @@ class Comfy::Admin::Cms::PagesControllerTest < ActionDispatch::IntegrationTest
     r :get, new_comfy_admin_cms_site_page_path(site_id: @site)
     assert_response :success
 
-    assert_select "a[data-toggle='tab'][href='#ns-localized_a']", 'Localized Namespace'
+    assert_select "a[data-bs-toggle='tab'][href='#ns-localized_a']", 'Localized Namespace'
     assert_select 'label', 'Localized Fragment'
   ensure
     I18n.backend.store_translations(:en, comfy: { cms: { content:
@@ -168,7 +170,7 @@ class Comfy::Admin::Cms::PagesControllerTest < ActionDispatch::IntegrationTest
     assert assigns(:page)
     assert_template :edit
     assert_select "form[action='/admin/sites/#{@site.id}/pages/#{@page.id}']"
-    assert_select "select[data-url='/admin/sites/#{@site.id}/pages/#{@page.id}/form_fragments']"
+    assert_select "select[data-page-fragments-fragments-url-value='/admin/sites/#{@site.id}/pages/#{@page.id}/form_fragments']"
   end
 
   def test_get_edit_failure
@@ -339,7 +341,7 @@ class Comfy::Admin::Cms::PagesControllerTest < ActionDispatch::IntegrationTest
   end
 
   def test_get_form_fragments
-    r :get, form_fragments_comfy_admin_cms_site_page_path(site_id: @site, id: @page), xhr: true, params: {
+    r :get, form_fragments_comfy_admin_cms_site_page_path(site_id: @site, id: @page, format: :turbo_stream), xhr: true, params: {
       layout_id: comfy_cms_layouts(:nested).id
     }
     assert_response :success
@@ -347,7 +349,7 @@ class Comfy::Admin::Cms::PagesControllerTest < ActionDispatch::IntegrationTest
     assert_equal 2, assigns(:page).fragment_nodes.size
     assert_template 'comfy/admin/cms/fragments/_form_fragments'
 
-    r :get, form_fragments_comfy_admin_cms_site_page_path(site_id: @site, id: @page), xhr: true, params: {
+    r :get, form_fragments_comfy_admin_cms_site_page_path(site_id: @site, id: @page, format: :turbo_stream), xhr: true, params: {
       layout_id: @layout.id
     }
     assert_response :success
@@ -455,17 +457,17 @@ class Comfy::Admin::Cms::PagesControllerTest < ActionDispatch::IntegrationTest
   end
 
   def test_get_toggle_branch
-    r :get, toggle_branch_comfy_admin_cms_site_page_path(site_id: @site, id: @page), xhr: true, params: { format: :js }
+    r :post, toggle_branch_comfy_admin_cms_site_page_path(site_id: @site, id: @page), xhr: true, params: { format: :turbo_stream }
     assert_response :success
     assert_equal [@page.id.to_s], session[:cms_page_tree]
 
-    r :get, toggle_branch_comfy_admin_cms_site_page_path(site_id: @site, id: @page), xhr: true, params: { format: :js }
+    r :post, toggle_branch_comfy_admin_cms_site_page_path(site_id: @site, id: @page), xhr: true, params: { format: :turbo_stream }
     assert_response :success
     assert_equal [], session[:cms_page_tree]
   end
 
   def test_get_toggle_branch_no_record
-    r :get, toggle_branch_comfy_admin_cms_site_page_path(site_id: @site, id: @page), xhr: true, params: { format: :js }
+    r :post, toggle_branch_comfy_admin_cms_site_page_path(site_id: @site, id: @page), xhr: true, params: { format: :turbo_stream }
     assert_response :success
     assert_equal [@page.id.to_s], session[:cms_page_tree]
   end
