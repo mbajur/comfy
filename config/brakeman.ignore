@@ -1,0 +1,306 @@
+{
+  "ignored_warnings": [
+    {
+      "warning_type": "Mass Assignment",
+      "warning_code": 70,
+      "fingerprint": "01c551761be6c492f6e58704e58c80db838afe13d19044dfba64aa1cb49ad617",
+      "check_name": "MassAssignment",
+      "message": "Specify exact keys allowed for mass assignment instead of using `permit!` which allows any keys",
+      "file": "app/controllers/comfy/admin/cms/pages_controller.rb",
+      "line": 157,
+      "link": "https://brakemanscanner.org/docs/warning_types/mass_assignment/",
+      "code": "params.fetch(:page, {}).permit!",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "Comfy::Admin::Cms::PagesController",
+        "method": "page_params"
+      },
+      "user_input": null,
+      "confidence": "Medium",
+      "cwe_id": [
+        915
+      ],
+      "note": ""
+    },
+    {
+      "warning_type": "Dangerous Send",
+      "warning_code": 23,
+      "fingerprint": "2398b5d6eac605a6b9e21cac6450f377210f15e8f71339f915d7f194aa2fdaad",
+      "check_name": "Send",
+      "message": "User controlled method execution",
+      "file": "app/controllers/comfy/admin/cms/files_controller.rb",
+      "line": 70,
+      "link": "https://brakemanscanner.org/docs/warning_types/dangerous_send/",
+      "code": "send(\"on_#{params[:source]}_create_success\")",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "Comfy::Admin::Cms::FilesController",
+        "method": "create"
+      },
+      "user_input": "params[:source]",
+      "confidence": "High",
+      "cwe_id": [
+        77
+      ],
+      "note": ""
+    },
+    {
+      "warning_type": "Mass Assignment",
+      "warning_code": 70,
+      "fingerprint": "31070d48b66b6c159a1d07de91232de3c60bf13c78071f488594281b5f59da21",
+      "check_name": "MassAssignment",
+      "message": "Specify exact keys allowed for mass assignment instead of using `permit!` which allows any keys",
+      "file": "app/controllers/comfy/admin/cms/sites_controller.rb",
+      "line": 66,
+      "link": "https://brakemanscanner.org/docs/warning_types/mass_assignment/",
+      "code": "params.fetch(:site, {}).permit!",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "Comfy::Admin::Cms::SitesController",
+        "method": "site_params"
+      },
+      "user_input": null,
+      "confidence": "Medium",
+      "cwe_id": [
+        915
+      ],
+      "note": ""
+    },
+    {
+      "warning_type": "Cross-Site Scripting",
+      "warning_code": 4,
+      "fingerprint": "3e6904ba5f0b679722db2d70550552f653df3033fd7679e653b2cec9cb91a4cf",
+      "check_name": "LinkToHref",
+      "message": "Potentially unsafe model attribute in `link_to` href",
+      "file": "app/views/comfy/admin/cms/sites/index.html.haml",
+      "line": 20,
+      "link": "https://brakemanscanner.org/docs/warning_types/link_to_href",
+      "code": "link_to(::Comfy::Cms::Site.new.url, ::Comfy::Cms::Site.new.url, :target => \"_blank\")",
+      "render_path": [
+        {
+          "type": "controller",
+          "class": "Comfy::Admin::Cms::SitesController",
+          "method": "index",
+          "line": 16,
+          "file": "app/controllers/comfy/admin/cms/sites_controller.rb",
+          "rendered": {
+            "name": "comfy/admin/cms/sites/index",
+            "file": "app/views/comfy/admin/cms/sites/index.html.haml"
+          }
+        }
+      ],
+      "location": {
+        "type": "template",
+        "template": "comfy/admin/cms/sites/index"
+      },
+      "user_input": "::Comfy::Cms::Site.new.url",
+      "confidence": "Weak",
+      "cwe_id": [
+        79
+      ],
+      "note": ""
+    },
+    {
+      "warning_type": "Mass Assignment",
+      "warning_code": 70,
+      "fingerprint": "80d4f6cc39f1c9ccb8be73423bb728929f8374ceace82f42ba614fbc8aa893c9",
+      "check_name": "MassAssignment",
+      "message": "Specify exact keys allowed for mass assignment instead of using `permit!` which allows any keys",
+      "file": "app/controllers/comfy/admin/cms/categories_controller.rb",
+      "line": 36,
+      "link": "https://brakemanscanner.org/docs/warning_types/mass_assignment/",
+      "code": "params.fetch(:category, {}).permit!",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "Comfy::Admin::Cms::CategoriesController",
+        "method": "category_params"
+      },
+      "user_input": null,
+      "confidence": "Medium",
+      "cwe_id": [
+        915
+      ],
+      "note": ""
+    },
+    {
+      "warning_type": "Mass Assignment",
+      "warning_code": 70,
+      "fingerprint": "88b7b9d5bb2c5c7b83a3acfa8c0119f333d0ad8aa611a36af646defb857de01e",
+      "check_name": "MassAssignment",
+      "message": "Specify exact keys allowed for mass assignment instead of using `permit!` which allows any keys",
+      "file": "app/controllers/comfy/admin/cms/translations_controller.rb",
+      "line": 84,
+      "link": "https://brakemanscanner.org/docs/warning_types/mass_assignment/",
+      "code": "params.fetch(:translation, {}).permit!",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "Comfy::Admin::Cms::TranslationsController",
+        "method": "translation_params"
+      },
+      "user_input": null,
+      "confidence": "Medium",
+      "cwe_id": [
+        915
+      ],
+      "note": ""
+    },
+    {
+      "warning_type": "Cross-Site Scripting",
+      "warning_code": 2,
+      "fingerprint": "9a1237f6e4ff6cdbefca1cd52676bcb5ae5c38716aace6e3ddb8b4903ca8a238",
+      "check_name": "CrossSiteScripting",
+      "message": "Unescaped parameter value",
+      "file": "app/views/comfy/admin/cms/revisions/show.html.haml",
+      "line": 25,
+      "link": "https://brakemanscanner.org/docs/warning_types/cross_site_scripting",
+      "code": "Diffy::Diff.new(@record.revision_fields.each_with_object({}) do\n c[f] = @record.revisions.find(params[:id]).data[f]\n end[label], content)",
+      "render_path": [
+        {
+          "type": "controller",
+          "class": "Comfy::Admin::Cms::Revisions::BaseController",
+          "method": "show",
+          "line": 23,
+          "file": "app/controllers/comfy/admin/cms/revisions/base_controller.rb",
+          "rendered": {
+            "name": "comfy/admin/cms/revisions/show",
+            "file": "app/views/comfy/admin/cms/revisions/show.html.haml"
+          }
+        }
+      ],
+      "location": {
+        "type": "template",
+        "template": "comfy/admin/cms/revisions/show"
+      },
+      "user_input": "params[:id]",
+      "confidence": "Weak",
+      "cwe_id": [
+        79
+      ],
+      "note": ""
+    },
+    {
+      "warning_type": "Dangerous Send",
+      "warning_code": 23,
+      "fingerprint": "9f1c4c6a2561c0ea2db7616d1ddd0971ddd91836a73f442bd6d4f6d261294339",
+      "check_name": "Send",
+      "message": "User controlled method execution",
+      "file": "app/controllers/comfy/admin/cms/files_controller.rb",
+      "line": 77,
+      "link": "https://brakemanscanner.org/docs/warning_types/dangerous_send/",
+      "code": "send(\"on_#{params[:source]}_create_failure\")",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "Comfy::Admin::Cms::FilesController",
+        "method": "create"
+      },
+      "user_input": "params[:source]",
+      "confidence": "High",
+      "cwe_id": [
+        77
+      ],
+      "note": ""
+    },
+    {
+      "warning_type": "Denial of Service",
+      "warning_code": 76,
+      "fingerprint": "c69c4a28721b236163556afa8f2cf530133490d26699b1f82ab426fd1a464408",
+      "check_name": "RegexDoS",
+      "message": "Parameter value used in regular expression",
+      "file": "app/controllers/comfy/cms/base_controller.rb",
+      "line": 21,
+      "link": "https://brakemanscanner.org/docs/warning_types/denial_of_service/",
+      "code": "/\\A#{(::Comfy::Cms::Site.find_by_id(params[:site_id]) or ::Comfy::Cms::Site.find_site(request.host_with_port.downcase, request.fullpath)).path}/",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "Comfy::Cms::BaseController",
+        "method": "load_cms_site"
+      },
+      "user_input": "params[:site_id]",
+      "confidence": "Weak",
+      "cwe_id": [
+        20,
+        185
+      ],
+      "note": ""
+    },
+    {
+      "warning_type": "Denial of Service",
+      "warning_code": 76,
+      "fingerprint": "c69c4a28721b236163556afa8f2cf530133490d26699b1f82ab426fd1a464408",
+      "check_name": "RegexDoS",
+      "message": "Parameter value used in regular expression",
+      "file": "app/controllers/comfy/cms/base_controller.rb",
+      "line": 23,
+      "link": "https://brakemanscanner.org/docs/warning_types/denial_of_service/",
+      "code": "/\\A#{(::Comfy::Cms::Site.find_by_id(params[:site_id]) or ::Comfy::Cms::Site.find_site(request.host_with_port.downcase, request.fullpath)).path}/",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "Comfy::Cms::BaseController",
+        "method": "load_cms_site"
+      },
+      "user_input": "params[:site_id]",
+      "confidence": "Weak",
+      "cwe_id": [
+        20,
+        185
+      ],
+      "note": ""
+    },
+    {
+      "warning_type": "Mass Assignment",
+      "warning_code": 70,
+      "fingerprint": "d7041ee6c6beb6b9fa012ecbf49aab08d0cc4b27d33cdbdd30bc6218777e619a",
+      "check_name": "MassAssignment",
+      "message": "Specify exact keys allowed for mass assignment instead of using `permit!` which allows any keys",
+      "file": "app/controllers/comfy/admin/cms/layouts_controller.rb",
+      "line": 66,
+      "link": "https://brakemanscanner.org/docs/warning_types/mass_assignment/",
+      "code": "params.fetch(:layout, {}).permit!",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "Comfy::Admin::Cms::LayoutsController",
+        "method": "layout_params"
+      },
+      "user_input": null,
+      "confidence": "Medium",
+      "cwe_id": [
+        915
+      ],
+      "note": ""
+    },
+    {
+      "warning_type": "Mass Assignment",
+      "warning_code": 70,
+      "fingerprint": "dcb129d8ff0fd36b96b1f7e34a79cc4bc883e19499ec51fb6e10f36fe75fcb80",
+      "check_name": "MassAssignment",
+      "message": "Specify exact keys allowed for mass assignment instead of using `permit!` which allows any keys",
+      "file": "app/controllers/comfy/admin/cms/snippets_controller.rb",
+      "line": 63,
+      "link": "https://brakemanscanner.org/docs/warning_types/mass_assignment/",
+      "code": "params.fetch(:snippet, {}).permit!",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "Comfy::Admin::Cms::SnippetsController",
+        "method": "snippet_params"
+      },
+      "user_input": null,
+      "confidence": "Medium",
+      "cwe_id": [
+        915
+      ],
+      "note": ""
+    }
+  ],
+  "updated": "2025-06-04 10:01:08 +0200",
+  "brakeman_version": "6.2.2"
+}
