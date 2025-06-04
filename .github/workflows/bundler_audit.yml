@@ -1,0 +1,41 @@
+name: "Bundler audit"
+on:
+  push:
+    branches:
+      - comfy
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  lint:
+    strategy:
+      matrix:
+        ruby-version:
+          - "3.2"
+          - "3.3"
+          - "3.4"
+        rails-version:
+          - "7.1"
+          - "7.2"
+          - "8.0"
+        continue-on-error: [true]
+    name: ${{ format('Tests (Ruby {0}, Rails {1})', matrix.ruby-version, matrix.rails-version) }}
+    runs-on: ubuntu-latest
+    continue-on-error: ${{ matrix.continue-on-error }}
+    env:
+      BUNDLE_GEMFILE: ${{ github.workspace }}/gemfiles/${{ matrix.rails-version }}.gemfile
+      RAILS_ENV: test
+      SKIP_COV: true
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v2
+
+      - name: Install Ruby ${{ matrix.ruby-version }}
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby-version }}
+          bundler-cache: true
+
+      - name: Rub bundler-audit
+        run: |
+          bin/bundle exec bundler-audit --update --gemfile-lock gemfiles/${{ matrix.rails-version }}.gemfile.lock

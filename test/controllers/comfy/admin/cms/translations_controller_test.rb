@@ -22,7 +22,9 @@ class Comfy::Admin::Cms::TranslationsControllerTest < ActionDispatch::Integratio
     @layout.update_column(:content, '{{cms:wysiwyg test}}')
     r :get, new_comfy_admin_cms_site_page_translation_path(@site, @page)
     assert_response :success
-    assert_select "textarea[name='translation[fragments_attributes][0][content]'][data-cms-rich-text]"
+
+    assert_select "input[type='hidden'][name='translation[fragments_attributes][0][content]']"
+    assert_select 'trix-editor'
     assert_select "input[type='hidden'][name='translation[fragments_attributes][0][identifier]'][value='test']"
     assert_select "input[type='hidden'][name='translation[fragments_attributes][0][tag]'][value='wysiwyg']"
   end

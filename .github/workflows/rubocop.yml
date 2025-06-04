@@ -1,0 +1,23 @@
+name: "Rubocop"
+on:
+  push:
+    branches:
+      - comfy
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v2
+
+      - name: Install Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.5
+          bundler-cache: true
+
+      - name: Lint the code
+        run: bin/bundle exec rubocop --parallel

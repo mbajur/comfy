@@ -1,6 +1,6 @@
 <turbo-stream action="replace" target="<%= dom_id(@page, :branch_heading) %>">
   <template>
-    <%= render "index_branch_heading", page: @page, category_view: false %>
+    <%= render partial: "index_branch_heading", formats: [:html], locals: { page: @page, category_view: false } %>
   </template>
 </turbo-stream>
 
@@ -8,7 +8,7 @@
   <turbo-stream action="replace" target="<%= dom_id(@page, :branch_children) %>">
     <template>
       <ul class="list children sortable pl-md-3" id="<%= dom_id(@page, :branch_children) %>">
-        <%= render partial: "index_branch", collection: @page.children %>
+        <%= render partial: "index_branch", collection: @page.children, formats: [:html] %>
       </ul>
     </template>
   </turbo-stream>

@@ -112,14 +112,14 @@ module ComfortableMediaSurfer::Extensions::ActsAsTree
     #
     #  root1child1.self_and_generation # => [root1child1, root1child2, root2child1, root2child2]
     def self_and_generation
-      self.class.select {|node| node.tree_level == self.tree_level }
+      self.class.select { |node| node.tree_level == tree_level }
     end
 
-    # Returns the level (depth) of the current node 
+    # Returns the level (depth) of the current node
     #
     #  root1child1.tree_level # => 1
     def tree_level
-      self.ancestors.size
+      ancestors.size
     end
 
     # BUG: https://github.com/rails/rails/issues/14369
