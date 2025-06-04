@@ -4,6 +4,7 @@ on:
     branches:
       - comfy
   pull_request:
+  workflow_dispatch:
 
 jobs:
   build_test_lint_audit:
