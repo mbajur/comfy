@@ -3,6 +3,8 @@
 require_relative '../test_helper'
 
 class FormBuilderTest < ActionView::TestCase
+  helper ActionText::Engine.helpers
+
   make_my_diffs_pretty!
   setup do
     @page = comfy_cms_pages(:default)
@@ -104,7 +106,7 @@ class FormBuilderTest < ActionView::TestCase
         <div class="col-sm-10">
           <input autocomplete="off" name="page[fragments_attributes][123][identifier]" type="hidden" value="test"/>
           <input autocomplete="off" name="page[fragments_attributes][123][tag]" type="hidden" value="date"/>
-          <input class="form-control" data-cms-date="true" id="fragment-test" name="page[fragments_attributes][123][datetime]" type="text" value=""/>
+          <input class="form-control" data-controller="datepicker" data-datepicker-locale-value="en" id="fragment-test" name="page[fragments_attributes][123][datetime]" type="text" value=""/>
         </div>
       </div>
     HTML
@@ -120,7 +122,7 @@ class FormBuilderTest < ActionView::TestCase
         <div class="col-sm-10">
           <input autocomplete="off" name="page[fragments_attributes][123][identifier]" type="hidden" value="test"/>
           <input autocomplete="off" name="page[fragments_attributes][123][tag]" type="hidden" value="datetime"/>
-          <input class="form-control" data-cms-datetime="true" id="fragment-test" name="page[fragments_attributes][123][datetime]" type="text" value=""/>
+          <input class="form-control" data-controller="datetimepicker" data-datetimepicker-locale-value="en" id="fragment-test" name="page[fragments_attributes][123][datetime]" type="text" value=""/>
         </div>
       </div>
     HTML
@@ -164,7 +166,13 @@ class FormBuilderTest < ActionView::TestCase
               <a class="btn btn-light text-truncate" data-cms-file-link-tag="{{ cms:page_file_link file, as: image }}" data-cms-file-thumb-url="#{thumb_url}" href="#{attachment_url}" target="_blank">fragment.jpeg</a>
               <input id="attachment_211760658" name="page[fragments_attributes][123][file_ids_destroy][]" type="checkbox" value="211760658"/>
               <label class="btn btn-light" for="attachment_211760658">
-                <i class="fas fa-fw fa-times"/>
+              <svg class="icon icon-tabler icons-tabler-outline icon-tabler-trash" fill="none" height="15" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="15">
+                <path d="M4 7l16 0"/>
+                <path d="M10 11l0 6"/>
+                <path d="M14 11l0 6"/>
+                <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"/>
+                <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"/>
+              </svg>
               </label>
             </div>
           </div>
@@ -210,8 +218,14 @@ class FormBuilderTest < ActionView::TestCase
             <div class="fragment-attachment btn-group btn-group-sm mb-1">
               <a class="btn btn-light text-truncate" data-cms-file-link-tag="{{ cms:page_file_link file, filename: &quot;fragment.jpeg&quot;, as: image }}" data-cms-file-thumb-url="#{thumb_url}" href="#{attachment_url}" target="_blank">fragment.jpeg</a>
               <input id="attachment_211760658" name="page[fragments_attributes][123][file_ids_destroy][]" type="checkbox" value="211760658"/>
-              <label class="btn btn-light" for="attachment_211760658">
-                <i class="fas fa-fw fa-times"/>
+                <label class="btn btn-light" for="attachment_211760658">
+                <svg class="icon icon-tabler icons-tabler-outline icon-tabler-trash" fill="none" height="15" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" width="15">
+                  <path d="M4 7l16 0"/>
+                  <path d="M10 11l0 6"/>
+                  <path d="M14 11l0 6"/>
+                  <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12"/>
+                  <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3"/>
+                </svg>
               </label>
             </div>
           </div>
@@ -279,7 +293,8 @@ class FormBuilderTest < ActionView::TestCase
         <div class="col-sm-10">
           <input autocomplete="off" name="page[fragments_attributes][123][identifier]" type="hidden" value="test"/>
           <input autocomplete="off" name="page[fragments_attributes][123][tag]" type="hidden" value="wysiwyg"/>
-          <textarea data-cms-rich-text="true" id="fragment-test" name="page[fragments_attributes][123][content]"></textarea>
+          <input autocomplete="off" id="trix_input_1" name="page[fragments_attributes][123][content]" type="hidden"/>
+          <trix-editor class="trix-content" data-blob-url-template="http://test.host/rails/active_storage/blobs/redirect/:signed_id/:filename" data-direct-upload-url="http://test.host/rails/active_storage/direct_uploads" id="fragment-test" input="trix_input_1"/>
         </div>
       </div>
     HTML
