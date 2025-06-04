@@ -287,18 +287,24 @@ class FormBuilderTest < ActionView::TestCase
   def test_fragment_field_for_wysiwyg
     tag = ComfortableMediaSurfer::Content::Tags::Wysiwyg.new(context: @page, params: ['test'])
     actual = @builder.fragment_field(tag, 123)
+    actual_sanitized =
+      actual
+        .gsub(%r{id="trix_input_\d+"}, 'id="trix_input_x"')
+        .gsub(%r{input="trix_input_\d+"}, 'input="trix_input_x"')
+
     expected = <<~HTML
       <div class="form-group row">
         <label class="renderable-true col-form-label col-sm-2 text-sm-right" for="fragment-test">Test</label>
         <div class="col-sm-10">
           <input autocomplete="off" name="page[fragments_attributes][123][identifier]" type="hidden" value="test"/>
           <input autocomplete="off" name="page[fragments_attributes][123][tag]" type="hidden" value="wysiwyg"/>
-          <input autocomplete="off" id="trix_input_1" name="page[fragments_attributes][123][content]" type="hidden"/>
-          <trix-editor class="trix-content" data-blob-url-template="http://test.host/rails/active_storage/blobs/redirect/:signed_id/:filename" data-direct-upload-url="http://test.host/rails/active_storage/direct_uploads" id="fragment-test" input="trix_input_1"/>
+          <input autocomplete="off" id="trix_input_x" name="page[fragments_attributes][123][content]" type="hidden"/>
+          <trix-editor class="trix-content" data-blob-url-template="http://test.host/rails/active_storage/blobs/redirect/:signed_id/:filename" data-direct-upload-url="http://test.host/rails/active_storage/direct_uploads" id="fragment-test" input="trix_input_x"/>
         </div>
       </div>
     HTML
-    assert_xml_equal expected, actual
+
+    assert_xml_equal expected, actual_sanitized
   end
 
   def test_form_actions
